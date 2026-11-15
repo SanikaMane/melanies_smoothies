@@ -1,6 +1,6 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
+from streamlit.connections import SnowflakeConnection
 from snowflake.snowpark.functions import col
 
 # Write directly to the app
@@ -20,7 +20,8 @@ name_on_order = st.text_input(
 
 st.write("The name on your Smoothie will be:", name_on_order)
 
-session = get_active_session()
+conn = st.connection("snowflake")
+session = conn.session()
 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col("FRUIT_NAME"))
 fruit_names = my_dataframe.to_pandas()["FRUIT_NAME"].tolist()
