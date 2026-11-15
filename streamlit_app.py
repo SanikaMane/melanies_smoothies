@@ -63,7 +63,7 @@ if ingredients_list:
             data=smoothiefroot_response.json(),
             use_container_width=True
         )
-
+        
     submit = st.button('Submit Order')
     if submit:
         my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
